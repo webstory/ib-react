@@ -1,0 +1,37 @@
+- var app_root = "/ib-react/app";
+
+doctype html
+html(lang="en")
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+
+    meta(name='description', content='Inkbunny React client')
+    meta(name='keywords', content='inkbunny')
+    meta(name='author' content='Hoya Kim.')
+
+    // ## CDN stylesheets
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css')
+    link(rel='stylesheet', href='#{app_root}/common/css/app.css')
+
+    // ## CDN javascripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/core-js/1.2.5/core.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.20/require.min.js')
+
+    script(src='#{app_root}/common/js/app.js')
+
+    //link(rel="icon" type="image/ico" href="#{app_root}/assets/img/favicon.ico")
+
+    block page_head
+
+    // Page specific css
+    block page_css
+
+  body
+    block content
+
+    // Page specific javascripts
+    block page_js
