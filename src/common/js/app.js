@@ -18,9 +18,9 @@ requirejs.config({
     ],
     'lodash': [
       local+'lodash/lodash.min',
-      cloudflare+'lodash.js/4.0.0/lodash.min',
-      jsdelivr+'lodash.js/4.0.0/lodash.min',
-      osscdn+'lodash/4.0.0/lodash.min'
+      jsdelivr+'lodash/4.0.1/lodash.min',
+      cloudflare+'lodash.js/4.0.1/lodash.min',
+      osscdn+'lodash/4.0.1/lodash.min'
     ],
     'oboe': [
       local+'oboe/dist/oboe-browser.min',
@@ -28,14 +28,14 @@ requirejs.config({
     ],
     'react': [
       local+'react/react.min',
-      cloudflare+'react/0.14.6/react.min',
       jsdelivr+'react/0.14.6/react.min',
+      cloudflare+'react/0.14.6/react.min',
       osscdn+'react/0.14.6/react.min'
     ],
     'react-dom': [
       local+'react/react-dom.min',
-      cloudflare+'react/0.14.6/react-dom.min',
       jsdelivr+'react/0.14.6/react-dom.min',
+      cloudflare+'react/0.14.6/react-dom.min',
       osscdn+'react/0.14.6/react-dom.min'
     ],
     'react-bootstrap': [
@@ -43,8 +43,8 @@ requirejs.config({
     ],
     'bootstrap': [
       local+'bootstrap/dist/js/bootstrap.min',
-      cloudflare+'twitter-bootstrap/3.3.5/js/bootstrap.min',
       jsdelivr+'bootstrap/3.3.5/js/bootstrap.min',
+      cloudflare+'twitter-bootstrap/3.3.5/js/bootstrap.min',
       osscdn+'bootstrap/3.3.5/js/bootstrap.min'
     ]
   },
