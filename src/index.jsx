@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { Grid, Col, Panel, Table, Button } from 'react-bootstrap';
 import _ from 'lodash';
 import $ from 'jquery';
+import 'app.css!';
 
 function ib_query(url, params, done, fail) {
   console.log(url, params);
