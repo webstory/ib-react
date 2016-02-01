@@ -73,35 +73,54 @@ class LoginForm extends React.Component {
 
 class Submissions extends React.Component {
   constructor(props) {
-    super(props)
-  }
+    super(props);
 
-  getInitialState() {
-    return {
+    this.state = {
       submissions: []
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const username = nextProps.user.username;
-    const sid = nextProps.user.sid;
+  componentWillMount() {
+    const sid = window.localStorage.getItem("sid");
 
-    this.updateSubmissions(username, sid);
+    this.setState({sid:sid});
   }
 
   componentDidMount() {
-    const username = this.props.user.username;
-    const sid = this.props.user.sid;
+    const username = this.props.username;
 
-    this.updateSubmissions(username, sid);
+    this.fetchFirstPageSubmissions(username);
   }
 
-  updateSubmissions(username, sid) {
+  fetchFirstPageSubmissions(username) {
     ib_query(
       'https://inkbunny.net/api_search.php',
-      {sid:sid, username:username, page:'1'},
+      {sid:this.state.sid, username:username, page:1, get_rid:'yes'},
       (data) => {
-        this.setState({submissions:data.submissions})
+        this.setState({
+          submissions:data.submissions,
+          pages:data.pages_count,
+          rid:data.rid,
+        });
+        if(data.pages_count > 1) {
+          this.fetchNextPageSubmissions(2);
+        }
+      }
+    );
+  }
+
+  fetchNextPageSubmissions(page) {
+    if(page > this.state.pages) {
+      return;
+    }
+
+    ib_query(
+      'https://inkbunny.net/api_search.php',
+      {sid:this.state.sid, rid:this.state.rid, page:page},
+      (data) => {
+        const submissions = _.concat(this.state.submissions, data.submissions);
+        this.setState({submissions:submissions});
+        this.fetchNextPageSubmissions(page+1);
       }
     );
   }
@@ -111,7 +130,6 @@ class Submissions extends React.Component {
     if(this.state) {
       submissions = _.map(this.state.submissions, (x) => {
         const src = x.thumbnail_url_small;
-        console.log(src);
         return (
           <img src={src} alt={x.title} />
         );
@@ -144,7 +162,7 @@ class Test extends React.Component {
     return (
       <div>
         <LoginForm onUpdate={this.onUserUpdate.bind(this)}/>
-        <Submissions user={this.state.user} />
+        <Submissions username={this.state.user.username} />
       </div>
     );
   }
