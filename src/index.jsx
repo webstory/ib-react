@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Grid, Col, Panel, Table, Button } from 'react-bootstrap';
+import { Grid, Col, Panel, Table, Button, Popover, Overlay, OverlayTrigger, Modal } from 'react-bootstrap';
 import _ from 'lodash';
 import $ from 'jquery';
 import 'app.css!';
@@ -95,7 +95,8 @@ class Submissions extends React.Component {
   fetchFirstPageSubmissions(username) {
     ib_query(
       'https://inkbunny.net/api_search.php',
-      {sid:this.state.sid, username:username, page:1, get_rid:'yes'},
+      //{sid:this.state.sid, username:username, page:1, get_rid:'yes'},
+      {sid:this.state.sid, unread_submissions:'yes', page:1, get_rid:'yes'},
       (data) => {
         this.setState({
           submissions:data.submissions,
@@ -110,7 +111,7 @@ class Submissions extends React.Component {
   }
 
   fetchNextPageSubmissions(page) {
-    if(page > this.state.pages) {
+    if(page > this.state.pages || page > 3) {
       return;
     }
 
@@ -129,9 +130,10 @@ class Submissions extends React.Component {
     let submissions = null;
     if(this.state) {
       submissions = _.map(this.state.submissions, (x) => {
-        const src = x.thumbnail_url_small;
+        // const src = x.thumbnail_url_small;
+
         return (
-          <img src={src} alt={x.title} />
+          <SubmissionItem item={x} />
         );
       });
     }
@@ -139,6 +141,56 @@ class Submissions extends React.Component {
     return (
       <div>{submissions}</div>
     )
+  }
+}
+
+class SubmissionItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showModal: false,
+      showPopover: false,
+    }
+  }
+
+  componentDidMount() {
+
+  }
+
+  render() {
+    const src = this.props.item.thumbnail_url_large;
+    return (
+      <div style={{display:'inline-block', position:'relative'}}>
+        <img src={src} alt={this.props.item.title} ref='target'
+           onClick={e => this.setState({showModal:true})}
+           onMouseEnter={e => this.setState({showPopover:true})}
+           onMouseLeave={e => this.setState({showPopover:false})} />
+        <Overlay show={this.state.showPopover}
+                 placement='bottom'
+                 container={this}
+                 target={() => ReactDOM.findDOMNode(this.refs.target)}>
+          <Popover title={this.props.item.title}>
+            <p>by {this.props.item.username}</p>
+          </Popover>
+        </Overlay>
+        <Modal show={this.state.showModal}
+               bsSize="large"
+               onHide={e => this.setState({showModal:false})}>
+          <Modal.Header closeButton>
+            <Modal.Title>{this.props.item.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <a href={this.props.item.file_url_full} target="_blank">
+              <img className="img-responsive" src={this.props.item.file_url_full} />
+            </a>
+          </Modal.Body>
+          <Modal.Footer>
+            <p>by {this.props.item.username}</p>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
   }
 }
 
