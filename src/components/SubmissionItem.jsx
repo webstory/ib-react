@@ -3,6 +3,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Grid, Col, Panel, Table, Button, Popover, Overlay, OverlayTrigger, Modal } from 'react-bootstrap';
 
+
+class Picture extends React.Component {
+  render() {
+    return(
+      <img className="img-responsive" src={this.props.src} />
+    )
+  }
+
+}
+
 export class SubmissionItem extends React.Component {
   constructor(props) {
     super(props);
@@ -41,7 +51,7 @@ export class SubmissionItem extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <a href={this.props.item.file_url_full} target="_blank">
-              <img className="img-responsive" src={this.props.item.file_url_full} />
+              <Picture src={this.props.item.file_url_full} />
             </a>
           </Modal.Body>
           <Modal.Footer>
