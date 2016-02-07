@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Grid, Col, Panel, Table, ButtonGroup, Button, Popover, Overlay, OverlayTrigger, Modal } from 'react-bootstrap';
+import { Grid, Col, Panel, Table, ButtonGroup, Button, Popover, Overlay, OverlayTrigger, Modal, Tooltip } from 'react-bootstrap';
 
 import { ib_query } from './utils';
 
@@ -78,9 +78,10 @@ export class SubmissionItem extends React.Component {
                  placement='bottom'
                  container={this}
                  target={() => ReactDOM.findDOMNode(this.refs.target)}>
-          <Popover title={this.props.item.title}>
-            <p>by {this.props.item.username}</p>
-          </Popover>
+          <Tooltip placement="bottom">
+            <span>{this.props.item.title}</span><br />
+            <span className="text-info">by {this.props.item.username}</span>
+          </Tooltip>
         </Overlay>
         <Modal show={this.state.showModal}
                bsSize="large"

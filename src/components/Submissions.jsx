@@ -2,6 +2,8 @@
 import React from 'react';
 import _ from 'lodash';
 
+import { Grid, Button } from 'react-bootstrap';
+
 import { SubmissionItem } from './SubmissionItem';
 import { ib_query } from './utils';
 
@@ -16,13 +18,11 @@ export class Submissions extends React.Component {
 
   componentWillMount() {
     const sid = window.localStorage.getItem("sid");
-
     this.setState({sid:sid});
   }
 
   componentDidMount() {
     const username = this.props.username;
-
     this.fetchFirstPageSubmissions(username);
   }
 
@@ -34,18 +34,17 @@ export class Submissions extends React.Component {
       (data) => {
         this.setState({
           submissions:data.submissions,
+          loaded_page: 1,
           pages:data.pages_count,
           rid:data.rid,
         });
-        if(data.pages_count > 1) {
-          this.fetchNextPageSubmissions(2);
-        }
       }
     );
   }
 
-  fetchNextPageSubmissions(page) {
-    if(page > this.state.pages || page > 3) {
+  fetchNextPageSubmissions() {
+    const page = this.state.loaded_page + 1;
+    if(page > this.state.pages) {
       return;
     }
 
@@ -54,26 +53,27 @@ export class Submissions extends React.Component {
       {sid:this.state.sid, rid:this.state.rid, page:page},
       (data) => {
         const submissions = _.concat(this.state.submissions, data.submissions);
-        this.setState({submissions:submissions});
-        this.fetchNextPageSubmissions(page+1);
+        this.setState({submissions:submissions, loaded_page:page});
       }
     );
   }
 
   render() {
-    let submissions = null;
-    if(this.state) {
-      submissions = _.map(this.state.submissions, (x) => {
-        // const src = x.thumbnail_url_small;
+    const submissions = _.map(this.state.submissions, (x) => {
+      // const src = x.thumbnail_url_small;
 
-        return (
-          <SubmissionItem item={x} />
-        );
-      });
-    }
+      return (
+        <SubmissionItem item={x} />
+      );
+    });
 
     return (
-      <div>{submissions}</div>
+      <div>
+        <div>{submissions}</div>
+        <Grid fluid={true}>
+          <Button bsStyle="success" block onClick={this.fetchNextPageSubmissions.bind(this)}>Read more</Button>
+        </Grid>
+      </div>
     )
   }
 }

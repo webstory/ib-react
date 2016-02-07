@@ -2,6 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { Button } from 'react-bootstrap';
+
 import { LoginForm } from './LoginForm';
 import { Submissions } from './Submissions';
 
@@ -14,7 +16,6 @@ class Main extends React.Component {
     this.state = {
       user: {
         username: window.localStorage.getItem("username") || "",
-        sid: window.localStorage.getItem("sid") || "",
       }
     }
   }
@@ -24,9 +25,20 @@ class Main extends React.Component {
   }
 
   render() {
+    let nav = null;
+    const sid = window.localStorage.getItem("sid");
+    if(sid) {
+      nav = <div>
+        <span>Logged as {this.state.user.username}</span>
+        <Button bsSize="xsmall" bsStyle="danger">Logout</Button>
+      </div>
+    } else {
+      nav = <LoginForm onUpdate={this.onUserUpdate.bind(this)} />
+    }
+
     return (
       <div>
-        <LoginForm onUpdate={this.onUserUpdate.bind(this)} />
+        {nav}
         <Submissions username={this.state.user.username} />
       </div>
     );
