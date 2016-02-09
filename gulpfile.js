@@ -70,7 +70,7 @@ gulp.task('vendor', function() {
   log('Bundling vendor scripts...');
   return $.jspmBuild({
     bundles: [
-      { src: 'react + react-bootstrap + rx-react + bootstrap + jquery',
+      { src: 'react + react-bootstrap + bootstrap + jquery + lodash',
         dst: 'react.min.js',
         options: {
           'minify': true,

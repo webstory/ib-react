@@ -2,19 +2,14 @@
   "jspm": {
     "dependencies": {
       "bootstrap": "github:twbs/bootstrap@^3.3.6",
-      "cryptojs": "npm:cryptojs@^2.5.3",
       "css": "github:systemjs/plugin-css@^0.1.20",
       "jquery": "npm:jquery@^2.2.0",
       "jsx": "github:floatdrop/plugin-jsx@^1.1.0",
-      "leaflet": "github:Leaflet/Leaflet@^0.7.7",
       "lodash": "npm:lodash@^4.0.1",
       "oboe": "npm:oboe@^2.1.2",
       "react": "npm:react@^0.14.6",
       "react-bootstrap": "npm:react-bootstrap@^0.28.2",
-      "react-dom": "npm:react-dom@^0.14.6",
-      "rx-react": "npm:rx-react@^0.3.0",
-      "socket.io-client": "github:socketio/socket.io-client@^1.4.5",
-      "socketio": "github:socketio/socket.io-client@^1.4.5"
+      "react-dom": "npm:react-dom@^0.14.6"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",

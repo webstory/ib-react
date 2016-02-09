@@ -32,7 +32,7 @@ export class SubmissionItem extends React.Component {
                  placement='bottom'
                  container={this}
                  target={() => ReactDOM.findDOMNode(this.refs.target)}>
-          <Tooltip placement="bottom">
+          <Tooltip id="tooltip" placement="bottom">
             <span>{this.props.item.title}</span><br />
             <span className="text-info">by {this.props.item.username}</span>
           </Tooltip>

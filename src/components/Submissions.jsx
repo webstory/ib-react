@@ -71,7 +71,7 @@ export class Submissions extends React.Component {
     const showModal = this.showModal.bind(this);
     const submissions = _.map(this.state.submissions, (x) => {
       return (
-        <SubmissionItem item={x} onClick={showModal} />
+        <SubmissionItem key={x.submission_id} item={x} onClick={showModal} />
       );
     });
 

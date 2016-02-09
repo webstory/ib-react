@@ -19,7 +19,7 @@ class Pages extends React.Component {
   componentWillMount() {
     let pages = [];
     if(this.props.pagecount == 1) {
-      pages.push(<Picture className="img-responsive" src={this.props.primary} />);
+      pages.push(<Picture key='primary' className="img-responsive" src={this.props.primary} />);
       this.setState({pages:pages});
     } else {
       const sid = window.localStorage.getItem('sid');
@@ -31,9 +31,9 @@ class Pages extends React.Component {
         (data) => {
           _.map(data.submissions[0].files, (x) => {
             if(/^image\/.+$/.test(x.mimetype)) {
-              pages.push(<Picture className="img-responsive" src={x.file_url_full} />);
+              pages.push(<Picture key={x.file_id} className="img-responsive" src={x.file_url_full} />);
             } else if(/^application\/x-shockwave-flash$/.test(x.mimetype)) {
-              pages.push(<FlashMovie style={{height:window.innerHeight}} src={x.file_url_full} />);
+              pages.push(<FlashMovie key={x.file_id} style={{height:window.innerHeight}} src={x.file_url_full} />);
             }
           });
 
@@ -73,7 +73,7 @@ class FlashMovie extends React.Component {
           <param name="allowScriptAccess" value="never"></param>
           <embed style={{width:'100%', height:'100%'}} src={this.props.src} type="application/x-shockwave-flash"></embed>
         </object>
-        <div style={{'text-align':'center', color:'#888'}}>
+        <div style={{'textAlign':'center', color:'#888'}}>
           <a href={this.props.src} target="_blank">download</a>
         </div>
       </div>
