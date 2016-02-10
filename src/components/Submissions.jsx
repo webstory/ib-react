@@ -65,7 +65,7 @@ export class Submissions extends React.Component {
   }
 
   showModal(item) {
-    const modal = <SubmissionModal item={item} onClose={this.hideModal.bind(this)}/>
+    const modal = <SubmissionModal key={item.submission_id} item={item} onClose={this.hideModal.bind(this)}/>
 
     this.setState({submissionModal:modal});
   }
