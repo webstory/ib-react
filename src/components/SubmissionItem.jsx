@@ -12,7 +12,6 @@ export class SubmissionItem extends React.Component {
     super(props);
 
     this.state = {
-      submissionModal: null,
       showPopover: false,
       opacity: 1,
     }

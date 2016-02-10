@@ -12,8 +12,7 @@ var useSourceMaps = false;
 
 // MAIN PATHS
 var paths = {
-  app: 'app/',
-  vendor: 'app/vendor/',
+  app: 'app/'
 };
 
 
@@ -71,7 +70,7 @@ gulp.task('vendor', function() {
   return $.jspmBuild({
     bundles: [
       { src: 'react + react-bootstrap + bootstrap + jquery + lodash',
-        dst: 'react.min.js',
+        dst: 'vendor.min.js',
         options: {
           'minify': true,
           'mangle': true,
@@ -79,15 +78,13 @@ gulp.task('vendor', function() {
         }
       }
     ]
-  }).pipe(gulp.dest(paths.vendor));
+  }).pipe(gulp.dest(paths.app));
 });
 
 gulp.task('packages', function() {
   log('Copying jspm package files...');
   gulp.src('jspm_packages/**/*')
     .pipe(gulp.dest(paths.app + 'jspm_packages'));
-  gulp.src('config.js')
-    .pipe(gulp.dest(paths.app));
 });
 
 gulp.task('assets', function() {
