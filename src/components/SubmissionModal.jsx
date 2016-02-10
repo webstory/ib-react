@@ -16,7 +16,7 @@ class Pages extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let pages = [];
     if(this.props.pagecount == 1) {
       pages.push(<Picture key='primary' className="img-responsive" src={this.props.primary} />);
@@ -90,7 +90,7 @@ class Description extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const sid = window.localStorage.getItem('sid');
     const submission_id = this.props.submission_id;
 
