@@ -18,12 +18,15 @@ export class Submissions extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.fetchFirstPageSubmissions();
+  componentWillReceiveProps(nextProps) {
+    this.fetchFirstPageSubmissions(nextProps.user);
   }
 
-  fetchFirstPageSubmissions() {
-    const user = this.props.user;
+  componentDidMount() {
+    this.fetchFirstPageSubmissions(this.props.user);
+  }
+
+  fetchFirstPageSubmissions(user) {
     ib_query(
       'https://inkbunny.net/api_search.php',
       //{sid:this.state.sid, username:username, page:1, get_rid:'yes'},
