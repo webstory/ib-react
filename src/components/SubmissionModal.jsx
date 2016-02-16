@@ -174,7 +174,7 @@ export class SubmissionModal extends React.Component {
           ):null}
         </Modal.Body>
         <Modal.Footer>
-          <p>by {this.props.item.username}</p>
+          <p>by <a href={"https://inkbunny.net/"+this.props.item.username} target="_blank">{this.props.item.username}</a></p>
         </Modal.Footer>
       </Modal>
     );
