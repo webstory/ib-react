@@ -31,7 +31,7 @@ class Pages extends React.Component {
         (data) => {
           _.map(data.submissions[0].files, (x) => {
             if(/^image\/.+$/.test(x.mimetype)) {
-              pages.push(<Picture key={x.file_id} className="img-responsive" src={x.file_url_full} />);
+              pages.push(<Picture key={x.file_id} className="img-responsive" full_src={x.file_url_full} src={x.file_url_screen}/>);
             } else if(/^application\/x-shockwave-flash$/.test(x.mimetype)) {
               pages.push(<FlashMovie key={x.file_id} style={{height:window.innerHeight}} src={x.file_url_full} />);
             }
@@ -56,7 +56,7 @@ class Picture extends React.Component {
   render() {
     return(
       <div style={this.props.style}>
-        <a href={this.props.src} target="_blank">
+        <a href={this.props.full_src} target="_blank">
           <img className="img-responsive" src={this.props.src} />
         </a>
       </div>

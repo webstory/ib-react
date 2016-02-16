@@ -15,6 +15,7 @@ export class Submissions extends React.Component {
     this.state = {
       submissions: [],
       submissionModal: null,
+      fetching: false,
     }
   }
 
@@ -27,11 +28,12 @@ export class Submissions extends React.Component {
   }
 
   fetchFirstPageSubmissions(user) {
+    this.setState({fetching:true});
     ib_query(
       'https://inkbunny.net/api_search.php',
       //{sid:this.state.sid, username:username, page:1, get_rid:'yes'},
       //{sid:this.state.sid, unread_submissions:'yes', page:1, get_rid:'yes'},
-      {sid:user.sid, favs_user_id:user.user_id, submissions_per_page:50, orderby:"fav_datetime", get_rid:'yes'},
+      {sid:user.sid, favs_user_id:user.user_id, submissions_per_page:30, orderby:"fav_datetime", get_rid:'yes'},
       (data) => {
         this.setState({
           submissions:data.submissions,
@@ -39,6 +41,7 @@ export class Submissions extends React.Component {
           pages:data.pages_count,
           rid:data.rid,
         });
+        this.setState({fetching:false});
       }
     );
   }
@@ -50,12 +53,14 @@ export class Submissions extends React.Component {
       return;
     }
 
+    this.setState({fetching:true});
     ib_query(
       'https://inkbunny.net/api_search.php',
       {sid:user.sid, rid:this.state.rid, submissions_per_page:50, page:page},
       (data) => {
         const submissions = _.concat(this.state.submissions, data.submissions);
         this.setState({submissions:submissions, loaded_page:page});
+        this.setState({fetching:false});
       }
     );
   }
@@ -83,7 +88,7 @@ export class Submissions extends React.Component {
         <div>{submissions}</div>
         <div>{this.state.submissionModal}</div>
         <Grid fluid={true}>
-          <Button bsStyle="success" block onClick={this.fetchNextPageSubmissions.bind(this)}>Read more</Button>
+          <Button bsStyle="success" disabled={this.state.fetching} block onClick={this.fetchNextPageSubmissions.bind(this)}>{this.state.fetching ? "Fetching..." : "Read more"}</Button>
         </Grid>
       </div>
     )

@@ -112,7 +112,7 @@ System.config({
     "npm:bn.js@4.10.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
-    "npm:brace-expansion@1.1.2": {
+    "npm:brace-expansion@1.1.3": {
       "balanced-match": "npm:balanced-match@0.3.0",
       "concat-map": "npm:concat-map@0.0.1"
     },
@@ -199,11 +199,19 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:commander@2.9.0": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "events": "github:jspm/nodelibs-events@0.1.1",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "graceful-readlink": "npm:graceful-readlink@1.0.1",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:commoner@0.10.4": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
-      "commander": "npm:commander@2.8.1",
+      "commander": "npm:commander@2.9.0",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
       "detective": "npm:detective@4.3.1",
       "events": "github:jspm/nodelibs-events@0.1.1",
@@ -387,7 +395,7 @@ System.config({
       "brorand": "npm:brorand@1.0.5"
     },
     "npm:minimatch@3.0.0": {
-      "brace-expansion": "npm:brace-expansion@1.1.2",
+      "brace-expansion": "npm:brace-expansion@1.1.3",
       "path": "github:jspm/nodelibs-path@0.1.0"
     },
     "npm:mkdirp@0.5.1": {
