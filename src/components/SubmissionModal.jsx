@@ -18,29 +18,24 @@ class Pages extends React.Component {
 
   componentDidMount() {
     let pages = [];
-    if(this.props.pagecount == 1) {
-      pages.push(<Picture key='primary' className="img-responsive" full_src={this.props.full_src} src={this.props.screen_src} />);
-      this.setState({pages:pages});
-    } else {
-      const sid = window.localStorage.getItem('sid');
-      const submission_id = this.props.submission_id;
+    const sid = window.localStorage.getItem('sid');
+    const submission_id = this.props.submission_id;
 
-      ib_query(
-        'https://inkbunny.net/api_submissions.php',
-        {sid:sid, submission_ids:submission_id},
-        (data) => {
-          _.map(data.submissions[0].files, (x) => {
-            if(/^image\/.+$/.test(x.mimetype)) {
-              pages.push(<Picture key={x.file_id} className="img-responsive" full_src={x.file_url_full} src={x.file_url_screen}/>);
-            } else if(/^application\/x-shockwave-flash$/.test(x.mimetype)) {
-              pages.push(<FlashMovie key={x.file_id} style={{height:window.innerHeight}} src={x.file_url_full} />);
-            }
-          });
+    ib_query(
+      'https://inkbunny.net/api_submissions.php',
+      {sid:sid, submission_ids:submission_id},
+      (data) => {
+        _.map(data.submissions[0].files, (x) => {
+          if(/^image\/.+$/.test(x.mimetype)) {
+            pages.push(<Picture key={x.file_id} className="img-responsive" full_src={x.file_url_full} src={x.file_url_screen}/>);
+          } else if(/^application\/x-shockwave-flash$/.test(x.mimetype)) {
+            pages.push(<FlashMovie key={x.file_id} style={{height:window.innerHeight}} src={x.file_url_full} />);
+          }
+        });
 
-          this.setState({pages:pages});
-        }
-      );
-    }
+        this.setState({pages:pages});
+      }
+    );
   }
 
   render() {
@@ -68,10 +63,15 @@ class FlashMovie extends React.Component {
   render() {
     return(
       <div style={this.props.style}>
-        <object style={{display:'block', width:'100%', height:'100%'}}>
+        <object style={{display:'block', width:'100%', height:'95%'}}
+                type="application/x-shockwave-flash"
+                data={this.props.src}>
           <param name="movie" value={this.props.src}></param>
           <param name="allowScriptAccess" value="never"></param>
-          <embed style={{width:'100%', height:'100%'}} src={this.props.src} type="application/x-shockwave-flash"></embed>
+          <embed style={{display:'block', width:'100%', height:'95%'}}
+                 src={this.props.src}
+                 type="application/x-shockwave-flash">
+          </embed>
         </object>
         <div style={{'textAlign':'center', color:'#888'}}>
           <a href={this.props.src} target="_blank">download</a>

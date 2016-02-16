@@ -33,7 +33,7 @@ export class Submissions extends React.Component {
       'https://inkbunny.net/api_search.php',
       //{sid:this.state.sid, username:username, page:1, get_rid:'yes'},
       //{sid:this.state.sid, unread_submissions:'yes', page:1, get_rid:'yes'},
-      {sid:user.sid, favs_user_id:user.user_id, submissions_per_page:30, orderby:"fav_datetime", get_rid:'yes'},
+      {sid:user.sid, favs_user_id:user.user_id, submissions_per_page:50, orderby:"fav_datetime", get_rid:'yes'},
       (data) => {
         this.setState({
           submissions:data.submissions,
