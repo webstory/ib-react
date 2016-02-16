@@ -19,7 +19,7 @@ class Pages extends React.Component {
   componentDidMount() {
     let pages = [];
     if(this.props.pagecount == 1) {
-      pages.push(<Picture key='primary' className="img-responsive" src={this.props.primary} />);
+      pages.push(<Picture key='primary' className="img-responsive" full_src={this.props.full_src} src={this.props.screen_src} />);
       this.setState({pages:pages});
     } else {
       const sid = window.localStorage.getItem('sid');
@@ -162,7 +162,8 @@ export class SubmissionModal extends React.Component {
         <Modal.Body style={{position:'relative'}}>
           <Pages style={{'opacity':this.state.showDescription ? 0.2 : 1}}
                   pagecount={this.props.item.pagecount}
-                  primary={this.props.item.file_url_full}
+                  full_src={this.props.item.file_url_full}
+                  screen_src={this.props.item.file_url_screen}
                   submission_id={this.props.item.submission_id}/>
           { this.state.showDescription ? (
             <Fade in={this.state.showDescription}>
