@@ -18,7 +18,7 @@ export class SubmissionItem extends React.Component {
   }
 
   render() {
-    const src = this.props.item.thumbnail_url_large;
+    const src = this.props.item.thumbnail_url_large || this.props.item.thumbnail_url_large_noncustom;
     const onClick = this.props.onClick;
 
     return (
