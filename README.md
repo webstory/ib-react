@@ -11,9 +11,9 @@ If you doubt, clone project and running at your own web server.
 
 To build, you should install nodejs 4.0.0 or higher. Because this project uses ECMAScript6 features.
 
-Package manager: npm, jspm
-Build manager: gulp, babel
-Libraries used: React, Bootstrap, lo-dash
+ * Package manager: npm, jspm
+ * Build manager: gulp, babel
+ * Libraries used: React, Bootstrap, lo-dash
 
 ## PRE-REQUIREMENT
  * nodejs > 4.0.0
